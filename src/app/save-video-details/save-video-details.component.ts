@@ -5,6 +5,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { ActivatedRoute } from '@angular/router';
 import { VideoService } from '../video.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { VideoDto } from '../model/VideoDto';
 
 
 @Component({
@@ -28,12 +29,16 @@ export class SaveVideoDetailsComponent {
   fileName:string='';
   videoId:string='';
   fileselected:boolean=false;
-
+  videoUrl!:string;
 
 
   constructor(private activatedRoute:ActivatedRoute, private videoservice:VideoService,
       private matsnackBar:MatSnackBar) {
     this.videoId=this.activatedRoute.snapshot.params['videoId'];
+    this.videoservice.getVideo(this.videoId).subscribe(data=>{
+      this.videoUrl=data.videoUrl;
+    });
+
     this.saveVideoDetails = new FormGroup({
       title: this.title,
       description: this.description,
@@ -78,4 +83,7 @@ export class SaveVideoDetailsComponent {
       this.matsnackBar.open("Thumbnail uploaded successfully","Ok")
     })
   }
+
+
+
 }

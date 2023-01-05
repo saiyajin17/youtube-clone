@@ -22,6 +22,7 @@ import { VgCoreModule } from '@videogular/ngx-videogular/core';
 import { VgControlsModule } from '@videogular/ngx-videogular/controls';
 import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
+import { VideoPlayerComponent } from './video-player/video-player.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
     AppComponent,
     UploadVideoComponent,
     HeaderComponent,
-    SaveVideoDetailsComponent
+    SaveVideoDetailsComponent,
+    VideoPlayerComponent
   ],
   imports: [
     BrowserModule,
