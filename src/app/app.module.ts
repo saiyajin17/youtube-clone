@@ -8,15 +8,21 @@ import { UploadVideoComponent } from './upload-video/upload-video.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { HttpClientModule } from '@angular/common/http';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule } from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { HeaderComponent } from './header/header.component';
+import { MatChipsModule } from "@angular/material/chips";
 import { SaveVideoDetailsComponent } from './save-video-details/save-video-details.component'
- 
+import { VgCoreModule } from '@videogular/ngx-videogular/core';
+import { VgControlsModule } from '@videogular/ngx-videogular/controls';
+import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
+import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +37,7 @@ import { SaveVideoDetailsComponent } from './save-video-details/save-video-detai
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    NgxFileDropModule, 
+    NgxFileDropModule,
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
@@ -39,8 +45,12 @@ import { SaveVideoDetailsComponent } from './save-video-details/save-video-detai
     MatFormFieldModule,
     MatSelectModule,
     ReactiveFormsModule,
-    
-
+    MatChipsModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
