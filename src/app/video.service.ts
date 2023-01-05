@@ -12,7 +12,16 @@ export class VideoService {
   uploadVideoFile(fileEntry: File) {
     const formData = new FormData();
     formData.append("file", fileEntry, fileEntry.name);
-    
     return this.http.post<uploadVideoResponse>("http://localhost:8082/api/videos",formData);
   }
+
+  uploadThumbnail(fileEntry: File,videoId:string) {
+    const formData = new FormData();
+    formData.append("file", fileEntry, fileEntry.name);
+    formData.append("videoId",videoId);
+    return this.http.post("http://localhost:8082/api/videos/thumbnail",formData,{
+      responseType:'text'
+    });
+  }
+
 }
