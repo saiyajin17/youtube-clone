@@ -30,6 +30,7 @@ export class SaveVideoDetailsComponent {
   videoId: string = '';
   fileselected: boolean = false;
   videoUrl!: string;
+  thumbnailUrl!:string;
 
 
   constructor(private activatedRoute: ActivatedRoute, private videoservice: VideoService,
@@ -38,7 +39,7 @@ export class SaveVideoDetailsComponent {
     this.videoId = this.activatedRoute.snapshot.params['videoId'];
     this.videoservice.getVideo(this.videoId).subscribe(data => {
       this.videoUrl = data.videoUrl;
-      console.log(data.videoUrl);
+      this.thumbnailUrl=data.thumbnailUrl;
     });
 
     this.saveVideoDetails = new FormGroup({
@@ -81,10 +82,26 @@ export class SaveVideoDetailsComponent {
     this.videoservice.uploadThumbnail(this.selectedFile, this.videoId)
       .subscribe(() => {
         //show an upload success notification
-        this.matsnackBar.open("Thumbnail uploaded successfully", "Ok")
+        this.matsnackBar.open("Thumbnail uploaded successfully", "OK")
       })
   }
 
+  saveVideo(){
 
+    // call the video service to make a http call to our back end
+
+    const videoMetaData:VideoDto={
+      "id":this.videoId,
+      "title":this.saveVideoDetails.get('title')?.value,
+      "description":this.saveVideoDetails.get('description')?.value,
+      "tags":this.tags,
+      "videoStatus":this.saveVideoDetails.get('videoStatus')?.value,
+      "videoUrl":this.videoUrl,
+      "thumbnailUrl":this.thumbnailUrl
+    };
+    this.videoservice.saveVideo(videoMetaData).subscribe((data)=>{
+      this.matsnackBar.open("Video Metadata Updated Successfulyy","OK");
+    });
+  }
 
 }
