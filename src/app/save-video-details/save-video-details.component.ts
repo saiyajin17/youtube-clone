@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {MatChipInputEvent} from "@angular/material/chips";
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from "@angular/material/chips";
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ActivatedRoute } from '@angular/router';
 import { VideoService } from '../video.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { VideoDto } from '../model/VideoDto';
 
 
@@ -25,18 +25,20 @@ export class SaveVideoDetailsComponent {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   tags: string[] = [];
-  selectedFile!:File;
-  fileName:string='';
-  videoId:string='';
-  fileselected:boolean=false;
-  videoUrl!:string;
+  selectedFile!: File;
+  fileName: string = '';
+  videoId: string = '';
+  fileselected: boolean = false;
+  videoUrl!: string;
 
 
-  constructor(private activatedRoute:ActivatedRoute, private videoservice:VideoService,
-      private matsnackBar:MatSnackBar) {
-    this.videoId=this.activatedRoute.snapshot.params['videoId'];
-    this.videoservice.getVideo(this.videoId).subscribe(data=>{
-      this.videoUrl=data.videoUrl;
+  constructor(private activatedRoute: ActivatedRoute, private videoservice: VideoService,
+    private matsnackBar: MatSnackBar) {
+
+    this.videoId = this.activatedRoute.snapshot.params['videoId'];
+    this.videoservice.getVideo(this.videoId).subscribe(data => {
+      this.videoUrl = data.videoUrl;
+      console.log(data.videoUrl);
     });
 
     this.saveVideoDetails = new FormGroup({
@@ -67,21 +69,20 @@ export class SaveVideoDetailsComponent {
     }
   }
 
-  onFileSelected(event:Event)
-  {
+  onFileSelected(event: Event) {
     //@ts-ignore
-    this.selectedFile=event.target!.files[0];
-    this.fileName=this.selectedFile.name;
-    this.fileselected=true;
+    this.selectedFile = event.target!.files[0];
+    this.fileName = this.selectedFile.name;
+    this.fileselected = true;
   }
 
-  onUpload(){
-    // location.href.slice(location.href.lastIndexOf("/")).substring(1);
-    this.videoservice.uploadThumbnail(this.selectedFile,this.videoId).subscribe((data)=>{
-      console.log(data);
-      //show an upload success notification
-      this.matsnackBar.open("Thumbnail uploaded successfully","Ok")
-    })
+  onUpload() {
+
+    this.videoservice.uploadThumbnail(this.selectedFile, this.videoId)
+      .subscribe(() => {
+        //show an upload success notification
+        this.matsnackBar.open("Thumbnail uploaded successfully", "Ok")
+      })
   }
 
 
