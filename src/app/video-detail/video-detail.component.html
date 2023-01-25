@@ -1,0 +1,13 @@
+<div fxLayout="row" class="container">
+    <div class="videoPlayer">
+        <app-video-player *ngIf="videoAvailable" [videoUrl]="videoUrl" ></app-video-player>
+        <div class="">
+            <span *ngFor="let tag of tags"> {{tag}}</span>
+            <h2>{{videoTitle}}</h2>
+            <div>20th January 2022</div>
+            <div>{{description}}</div>
+        </div>
+    </div>
+    <div class="suggestion">Suggestion Bar</div>
+</div>
+

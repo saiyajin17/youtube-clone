@@ -29,7 +29,7 @@ export class VideoService {
   getVideo(videoId:string):Observable<VideoDto>{
      return this.http.get<VideoDto>("http://localhost:8082/api/videos/"+videoId);
   }
-
+  
   saveVideo(videoMetaData:VideoDto):Observable<VideoDto>{
     return this.http.put<VideoDto>("http://localhost:8082/api/videos",videoMetaData);
   }
